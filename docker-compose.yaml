@@ -1,0 +1,27 @@
+# version harusnya dihapus karena obsolete
+version: "3.9"
+
+services:
+  item-app:
+    # Gunakan image yang disimpan dari Github Packages
+    image: ghcr.io/kido1611/item-app:v1
+    # Selalu restart container jika aplikasi ada error/terhenti atau server restart
+    restart: always
+    # Bind port 80 dari host ke 8080 di container
+    ports:
+      - "8080:8080"
+    # Jalankan container jika item-db sudah jalan
+    depends_on:
+      - item-db
+
+  item-db:
+    # Gunakan image mongo versi 3 dari Docker Hub
+    image: mongo:3
+    # Selalu restart container jika aplikasi ada error/terhenti atau server restart
+    restart: always
+    # Bind volume app-db ke /data/db
+    volumes:
+      - "app-db:/data/db"
+
+volumes:
+  app-db:
