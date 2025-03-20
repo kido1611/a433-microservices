@@ -9,7 +9,7 @@ services:
     restart: always
     # Bind port 80 dari host ke 8080 di container
     ports:
-      - "8080:8080"
+      - "80:8080"
     # Jalankan container jika item-db sudah jalan
     depends_on:
       - item-db
