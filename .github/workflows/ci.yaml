@@ -51,7 +51,9 @@ jobs:
         run: docker build -t ghcr.io/kido1611/karsajobs:latest .
 
       - name: Login to container registry
-        run: docker login -u kido1611 -p ${{secrets.TOKEN}} ghcr.io
+        env:
+          PASSWORD_TOKEN: ${{ secrets.TOKEN }}
+        run: echo "$PASSWORD_TOKEN" | docker login -u kido1611 --password-stdin ghcr.io
 
       - name: Push container image
         run: docker push ghcr.io/kido1611/karsajobs:latest
