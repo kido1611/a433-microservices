@@ -46,3 +46,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Build container image
+        run: docker build -t ghcr.io/kido1611/karsajobs:latest .
+
+      - name: Login to container registry
+        run: docker login -u kido1611 -p ${{secrets.TOKEN}} ghcr.io
+
+      - name: Push container image
+        run: docker push ghcr.io/kido1611/karsajobs:latest
